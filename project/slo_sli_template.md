@@ -1,6 +1,8 @@
-| **Category** | **SLI**                                                                                                                                                                             | **SLO **                                                                                                     |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| Availability | sum (rate(apiserver_request_total{job="apiserver",code!~"5.."}[2d]))<br>/<br>sum (rate(apiserver_request_total{job="apiserver"}[2d]))                                               | 99%                                                                                                          |
-| Latency      | histogram_quantile(0.90,<br>sum(rate(apiserver_request_duration_seconds_bucket{job="apiserver"}[5m])) by (le, verb))                                                                | 90% of requests below 100ms                                                                                  |
-| Error Budget | 1 - ((1 - (sum(increase(apiserver_request_total{job="apiserver", code="200"}[7d])) by (verb)) / sum(increase(apiserver_request_total{job="apiserver"}[7d])) by (verb)) / (1 - .80)) | Error budget is defined at 20%. This means that 20% of the requests can fail and still be within the budget  |
-| Throughput   | sum(rate(apiserver_request_total{job="apiserver",code=~"2.."}[5m]))                                                                                                                 | 5 RPS indicates the application is functioning well                                                           |
+# API Service
+
+| Category     | SLI | SLO                                                                                                         |
+|--------------|---------------------|-------------------------------------------------------------------------------------------------------------|
+| Availability |Total number of successful requests / Total number of requests| 99%                                                                                                         |
+| Latency      |Buckets of requests in a histogram showing the 90th percentile| 90% of requests below 100ms                                                                                 |
+| Error Budget |Percentage of the number of error requests/total number of requests in budget.| Error budget is defined at 20%. This means that 20% of the requests can fail and still be within the budget |
+| Throughput   |Total number of successful requests| 5 RPS indicates the application is functioning                                                              |
