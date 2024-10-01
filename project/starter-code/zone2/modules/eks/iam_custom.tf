@@ -22,7 +22,7 @@ resource "aws_iam_policy" "eks_cluster_role_cloudwatch_policy" {
 POLICY
 }
 
- resource "aws_iam_policy" "eks_node_instance_policy" {
+ resource "aws_iam_policy" "eks_node_instance_policy1" {
    name        = "app-${var.name}-instance-policy"
    description = "Policy allowing access to ${var.name} resources."
 
