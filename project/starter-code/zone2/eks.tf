@@ -23,8 +23,8 @@ provider "kubernetes" {
    nodes_desired_size = 2
    nodes_max_size     = 2
    nodes_min_size     = 1
-   instance_policy    = data.aws_iam_policy.instance-policy
-   cloudwatch_policy  = data.aws_iam_policy.cloudwatch-policy
-   cluster_role       = data.aws_iam_role.eks_cluster_role
-   node_role          = data.aws_iam_role.eks_node_role
+   #instance_policy    = data.aws_iam_policy.instance-policy
+   #cloudwatch_policy  = data.aws_iam_policy.cloudwatch-policy
+   #cluster_role       = data.aws_iam_role.eks_cluster_role
+   #node_role          = data.aws_iam_role.eks_node_role
  }
