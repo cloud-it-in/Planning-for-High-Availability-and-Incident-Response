@@ -22,8 +22,8 @@ resource "aws_security_group" "eks-cluster" {
 }
 resource "aws_eks_cluster" "cluster" {
    name     = "${var.name}-cluster"
-   version  = "1.27"
-   role_arn = "${cluster_role}-cluster"
+   version  = "1.31"
+   role_arn = aws_iam_role.eks_cluster_role.arn
 
    vpc_config {
      security_group_ids = ["${aws_security_group.eks-cluster.id}"]
@@ -41,7 +41,7 @@ resource "aws_eks_cluster" "cluster" {
  resource "aws_eks_node_group" "node" {
    cluster_name    = aws_eks_cluster.cluster.name
    node_group_name = "app-${var.name}-node-group"
-   node_role_arn   = var.node_role.arn
+   node_role_arn   = aws_iam_role.eks_node_cluster_role.arn
    subnet_ids      = var.private_subnet_ids
    instance_types  = [var.instance_type]
 
