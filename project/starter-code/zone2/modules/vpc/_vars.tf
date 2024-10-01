@@ -5,13 +5,19 @@ variable "name" {}
    type = list(string)
  }
 
- variable "public_subnet_tags" {
-   default = {us-west-1a}
- }
+variable "public_subnet_tags" {
+  type    = map(string)
+  default = {
+    "us-west-1a" = ""
+  }
+}
 
- variable "private_subnet_tags" {
-   default = {us-west-1b}
- }
+variable "private_subnet_tags" {
+  type    = map(string)
+  default = {
+    "us-west-1b" = ""
+  }
+}
 
  variable "account_owner" {
    default = ""
