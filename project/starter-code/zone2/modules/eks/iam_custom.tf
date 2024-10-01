@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "eks_cluster_role_cloudwatch_policy" {
-   name        = "app-${var.name}-eks-cluster-role-cloudwatch-policy"
+   name        = "app-${var.name}-eks-cluster-role-cloudwatch-policy1"
    description = "Policy allowing cloudwatch access to ${var.name} resources."
    policy      = <<POLICY
 {
