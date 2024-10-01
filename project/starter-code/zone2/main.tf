@@ -37,5 +37,4 @@ locals {
     providers "aws" {
       alias = "usw1"
       region = "us-west-1"
-   }
-  
+   }  
