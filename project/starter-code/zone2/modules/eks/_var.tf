@@ -26,8 +26,3 @@ variable "name" {}
  variable "tags" {
    default = {}
  }
-
- variable "instance_policy" {}
- variable "cloudwatch_policy" {}
- variable "cluster_role" {}
- variable "node_role"{}
