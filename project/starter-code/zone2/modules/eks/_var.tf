@@ -3,6 +3,7 @@ variable "name" {}
  variable "private_subnet_ids" {}
  variable "vpc_id" {}
  variable "ec2_sg" {}
+ variable "cluster_role" {}
  variable "instance_type" {
    description = "EC2 instance type to use for the argo EC2 instances."
    default     = "t3.medium"
