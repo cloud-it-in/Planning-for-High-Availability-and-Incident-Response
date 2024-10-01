@@ -44,7 +44,7 @@ resource "aws_rds_cluster" "udacity_cluster" {
   db_subnet_group_name     = aws_db_subnet_group.udacity_db_subnet_group.name
   engine                   = "aurora-mysql"
   engine_mode              = "provisioned"
-  engine_version           = "5.7.mysql_aurora.2.08.1" 
+  engine_version           = "5.7.mysql_aurora.2.11.2" 
   skip_final_snapshot      = true
   storage_encrypted        = false
   backup_retention_period = 5
