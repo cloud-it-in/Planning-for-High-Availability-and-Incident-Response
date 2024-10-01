@@ -18,7 +18,7 @@ resource "aws_lb" "udacity" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.ec2_sg]
-  subnets            = var.subnet_ids  # Corrected to plural
+  subnets            = var.subnet_id  # Corrected to plural
 
   enable_deletion_protection = false
 }
