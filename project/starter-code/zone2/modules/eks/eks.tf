@@ -23,7 +23,7 @@ resource "aws_security_group" "eks-cluster" {
 resource "aws_eks_cluster" "cluster" {
    name     = "${var.name}-cluster"
    version  = "1.27"
-   role_arn = var.cluster_role.arn
+   role_arn = "${cluster_role}-cluster"
 
    vpc_config {
      security_group_ids = ["${aws_security_group.eks-cluster.id}"]
