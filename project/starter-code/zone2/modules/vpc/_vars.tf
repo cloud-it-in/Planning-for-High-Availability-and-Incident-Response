@@ -6,11 +6,11 @@ variable "name" {}
  }
 
  variable "public_subnet_tags" {
-   default = {}
+   default = {"us-west-1a", "us-west-1b"}
  }
 
  variable "private_subnet_tags" {
-   default = {}
+   default = {"us-west-1a", "us-west-1b"}
  }
 
  variable "account_owner" {
