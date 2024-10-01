@@ -20,6 +20,9 @@ provider "kubernetes" {
    private_subnet_ids = module.vpc.private_subnet_ids
    ec2_sg             = module.project_ec2.ec2_sg
    vpc_id             = module.vpc.vpc_id
+   output "node_harmony_policy_attachment" {
+  value = aws_iam_role_policy_attachment.node_harmony_policy_attachment
+}
    nodes_desired_size = 1
    nodes_max_size     = 2
    nodes_min_size     = 1
