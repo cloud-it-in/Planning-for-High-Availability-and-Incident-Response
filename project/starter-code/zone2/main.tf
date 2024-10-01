@@ -35,7 +35,7 @@ locals {
       "kubernetes.io/role/elb" = 1
     }
     providers "aws" {
-      alias = "aws.usw1"
+      alias = "usw1"
       region = "us-west-1"
    }
   
