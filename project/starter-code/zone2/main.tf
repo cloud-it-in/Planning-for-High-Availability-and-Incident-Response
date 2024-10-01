@@ -23,8 +23,8 @@ locals {
      "kubernetes.io/role/elb" = 1
    }
   provider "aws" {
-  alias  = "usw1"
-  region = "us-west-1"
+    alias  = "usw1"
+    region = "us-west-1"
  }
 
 output "vpc_id" {
