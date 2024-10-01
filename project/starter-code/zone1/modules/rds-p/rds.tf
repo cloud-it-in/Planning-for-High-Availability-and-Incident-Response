@@ -31,29 +31,30 @@ resource "aws_rds_cluster_parameter_group" "cluster_pg" {
 resource "aws_db_subnet_group" "udacity_db_subnet_group" {
   name       = "udacity_db_subnet_group"
   subnet_ids = var.private_subnet_ids
-
 }
+
 resource "aws_rds_cluster" "udacity_cluster" {
-  cluster_identifier       = "udacity-db-cluster"
-  availability_zones       = ["us-east-2a", "us-east-2b", "us-west-1a", us-west-1b"]
+  cluster_identifier              = "udacity-db-cluster"
+  availability_zones              = ["us-east-2a", "us-east-2b", "us-west-1a", "us-west-1b"]
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.cluster_pg.name
-  database_name            = "udacityc2"
-  master_username          = "udacity"
-  master_password          = "MyUdacityPassword"
-  vpc_security_group_ids   = [aws_security_group.db_sg_1.id]
-  db_subnet_group_name     = aws_db_subnet_group.udacity_db_subnet_group.name
-  engine                   = "aurora-mysql"
-  engine_mode              = "provisioned"
-  engine_version           = "5.7.mysql_aurora.2.08.1" 
-  skip_final_snapshot      = true
-  storage_encrypted        = false
-  backup_retention_period = 5
-  depends_on = [aws_rds_cluster_parameter_group.cluster_pg]
+  database_name                   = "udacityc2"
+  master_username                 = "udacity"
+  master_password                 = "MyUdacityPassword"
+  vpc_security_group_ids          = [aws_security_group.db_sg_1.id]
+  db_subnet_group_name            = aws_db_subnet_group.udacity_db_subnet_group.name
+  engine                          = "aurora-mysql"
+  engine_mode                     = "provisioned"
+  engine_version                  = "5.7.mysql_aurora.2.08.1"
+  skip_final_snapshot             = true
+  storage_encrypted               = false
+  backup_retention_period         = 5
+  depends_on                      = [aws_rds_cluster_parameter_group.cluster_pg]
+
   lifecycle {
     ignore_changes = [
       availability_zones,
     ]
-  }  
+  }
 }
 
 output "db_cluster_arn" {
@@ -75,7 +76,7 @@ resource "aws_rds_cluster_instance" "udacity_instance" {
 
 resource "aws_security_group" "db_sg_1" {
   name   = "udacity-db-sg"
-  vpc_id =  var.vpc_id
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 3306
@@ -85,9 +86,9 @@ resource "aws_security_group" "db_sg_1" {
   }
 
   egress {
-    from_port   = 3306
-    protocol    = "TCP"
-    to_port     = 3306
+    from_port   = 0
+    protocol    = "-1"
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
