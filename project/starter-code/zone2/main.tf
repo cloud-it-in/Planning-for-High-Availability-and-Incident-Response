@@ -34,7 +34,8 @@ locals {
     public_subnet_tags = {
       "kubernetes.io/role/elb" = 1
     }
-   providers = {
-     aws = aws.usw1
+    providers "aws" {
+      alias = "aws.usw1"
+      region = "us-west-1"
    }
-  }
+  
