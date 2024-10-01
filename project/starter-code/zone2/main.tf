@@ -32,10 +32,10 @@ locals {
 #    name          = "${local.name}-project"
 #    azs           = ["us-west-1a", "us-west-1b"]
 #    private_subnet_tags = {
-#      "kubernetes.io/role/internal-elb" = 1
+#      "kubernetes.io/role/internal-alb" = 1
 #    }
 #    public_subnet_tags = {
-#      "kubernetes.io/role/elb" = 1
+#      "kubernetes.io/role/alb" = 1
 #    }
 #   providers = {
 #     aws = aws.usw1
