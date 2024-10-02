@@ -1,6 +1,7 @@
 resource "aws_rds_cluster_parameter_group" "cluster_pg" {
   name   = "udacity-pg-p"
   family = "aurora5.6"
+  
 
   parameter {
     name  = "binlog_format"    
@@ -47,6 +48,7 @@ resource "aws_rds_cluster_instance" "udacity_instance" {
   identifier           = "udacity-db-instance-${count.index}"
   cluster_identifier   = aws_rds_cluster.udacity_cluster.id
   instance_class       = "db.t2.small"
+  engine               = "aurora-mysql"
   db_subnet_group_name = aws_db_subnet_group.udacity_db_subnet_group.name
 }
 
