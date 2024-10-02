@@ -34,7 +34,7 @@
    gateway_id             = aws_internet_gateway.this[0].id
 
    timeouts {
-     create = "5m"
+     create = "15m"
    }
  }
 
