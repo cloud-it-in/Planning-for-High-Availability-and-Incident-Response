@@ -41,7 +41,7 @@ resource "aws_vpc" "this" {
    tags = merge(
      {
        "Name" = format(
-         "%s-public-%s",
+         "%s-public-%s1",
          var.name,
          element(var.azs, count.index),
        )
