@@ -12,7 +12,7 @@
 
 
 resource "aws_rds_cluster_parameter_group" "cluster_pg" {
-  name   = "udacity-pg-p"
+  name   = "udacity-pg-p1"
   family = "aurora-mysql5.7"
 
   parameter {
