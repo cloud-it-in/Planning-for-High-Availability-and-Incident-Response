@@ -1,7 +1,19 @@
+# resource "aws_db_instance" "default" {
+#   allocated_storage    = 10
+#   engine               = "mysql"
+#   engine_version       = "5.7"
+#   instance_class       = "db.t3.micro"
+#   username             = "udacity"
+#   password             = "MyUdacityPassword"
+#   parameter_group_name = "default.mysql5.7"
+#   multi-az             = true
+#   skip_final_snapshot  = true
+# }
+
+
 resource "aws_rds_cluster_parameter_group" "cluster_pg" {
   name   = "udacity-pg-p"
-  family = "aurora5.6"
-  
+  family = "aurora-mysql5.7"
 
   parameter {
     name  = "binlog_format"    
@@ -23,7 +35,7 @@ resource "aws_db_subnet_group" "udacity_db_subnet_group" {
 }
 resource "aws_rds_cluster" "udacity_cluster" {
   cluster_identifier       = "udacity-db-cluster"
-  availability_zones       = ["us-east-2a", "us-east-2b", "us-east-2c"]
+  availability_zones       = ["us-east-2a", "us-east-2b"]
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.cluster_pg.name
   database_name            = "udacityc2"
   master_username          = "udacity"
@@ -35,20 +47,29 @@ resource "aws_rds_cluster" "udacity_cluster" {
   engine_version           = "5.7.mysql_aurora.2.11.2" 
   skip_final_snapshot      = true
   storage_encrypted        = false
-  backup_retention_period  = 5
+  backup_retention_period = 5
   depends_on = [aws_rds_cluster_parameter_group.cluster_pg]
+  lifecycle {
+    ignore_changes = [
+      availability_zones,
+    ]
+  }  
 }
 
 output "db_cluster_arn" {
   value = aws_rds_cluster.udacity_cluster.arn
 }
 
+output "db_instance_arn" {
+  value = aws_rds_cluster_instance.udacity_instance[0].arn
+}
+
 resource "aws_rds_cluster_instance" "udacity_instance" {
   count                = 2
+  engine               = "aurora-mysql"
   identifier           = "udacity-db-instance-${count.index}"
   cluster_identifier   = aws_rds_cluster.udacity_cluster.id
   instance_class       = "db.t2.small"
-  engine               = "aurora-mysql"
   db_subnet_group_name = aws_db_subnet_group.udacity_db_subnet_group.name
 }
 
